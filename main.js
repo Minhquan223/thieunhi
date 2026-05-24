@@ -54,7 +54,7 @@ if (termInput) {
             const val = termInput.value.trim().toLowerCase();
             termResponse.style.display = 'block';
             
-            if (val === 'ebe' || val === 'công chúa' || val === 'thùy linh') { 
+            if (val === 'linh thúi' || val === 'linh nâu' || val === 'ebe cua' || val === 'thùy linh thúi' ) { 
                 termResponse.innerHTML = "[✓] Decode thành công! Đang cấp quyền truy cập hệ thống...";
                 termResponse.style.color = '#ffb6c1';
                 termInput.disabled = true; 
