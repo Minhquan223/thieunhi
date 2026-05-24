@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gửi Ebe Thùy Linh 💖</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Nhúng Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Thư viện GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Thư viện Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <!-- 1. Custom Cursor -->
+    <div class="cursor-heart">💖</div>
+
+    <!-- 3. Loading Screen -->
+    <div id="loader">
+        <div class="spinner"></div>
+        <p>Đang chuẩn bị điều bất ngờ cho Thùy Linh...</p>
+    </div>
+
+    <!-- 4. TERMINAL CTF (Giờ nó đã nằm đúng chỗ để JS nhận diện) -->
+    <div id="terminal-overlay">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <span>root@EbeLinh_Server:~</span>
+                <button id="close-terminal">X</button>
+            </div>
+            <div class="terminal-body" id="term-body">
+                <p class="term-text">Hệ thống bảo mật Kỹ thuật Mật mã được kích hoạt.</p>
+                <p class="term-text">Cảnh báo: Bức thư này được mã hóa nội bộ.</p>
+                <p class="term-text">Vui lòng nhập mật khẩu để giải mã (Gợi ý: Biệt danh anh hay gọi em là gì?)</p>
+                <div class="term-input-line">
+                    <span>> </span>
+                    <input type="text" id="term-input" autocomplete="off" autofocus>
+                </div>
+                <p id="term-response" class="term-text" style="display: none;"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. Audio BGM -->
+    <audio id="bgm" src="assets/glue_song.mp3" loop></audio>
+
+    <!-- 6. Three.js Background Layer -->
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- 7. Cinematic Intro Layer -->
+    <section id="intro" class="fullscreen">
+        <div class="intro-text">
+            <h1 class="text-line">Chào mừng 1/6...</h1>
+            <h1 class="text-line">Ngày của cô bé đáng yêu nhất thế giới</h1>
+            <button id="start-btn">Nhấn vào đây nhé Ebe 💌</button>
+        </div>
+    </section>
+
+    <!-- 8. Nội dung chính Parallax -->
+    <main id="main-content" style="display: none;">
+        <section class="parallax-section" id="section-1">
+            <h2 class="gsap-title">Thế giới của Linh</h2>
+            
+            <!-- Đếm ngày yêu -->
+            <div class="love-timer">
+                <p>Thời gian trôi qua cùng Ebe:</p>
+                <div class="time-blocks">
+                    <div class="time-box"><span id="l-days">0</span><small>Ngày</small></div>
+                    <div class="time-box"><span id="l-hours">0</span><small>Giờ</small></div>
+                    <div class="time-box"><span id="l-mins">0</span><small>Phút</small></div>
+                    <div class="time-box"><span id="l-secs">0</span><small>Giây</small></div>
+                </div>
+            </div>
+
+            <!-- Gallery -->
+            <div class="parallax-gallery">
+                <div class="parallax-item" data-speed="0.5">
+                    <img src="assets/linh1.jpg" alt="Thùy Linh 1">
+                    <div class="caption">Cười xinh chưa nè 💖</div>
+                </div>
+                <div class="parallax-item" data-speed="1.2">
+                    <img src="assets/linh2.jpg" alt="Thùy Linh 2">
+                    <div class="caption">Đáng yêu xỉu ✨</div>
+                </div>
+                <div class="parallax-item" data-speed="0.8">
+                    <img src="assets/linh3.jpg" alt="Thùy Linh 3">
+                    <div class="caption">Ebe của anh 🥰</div>
+                </div>
+                <div class="parallax-item" data-speed="1.5">
+                    <img src="assets/linh4.jpg" alt="Thùy Linh 4">
+                    <div class="caption">Công chúa nhỏ 👑</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phòng tối Darkroom -->
+        <section class="darkroom-section parallax-section">
+            <h2 class="gsap-title" style="margin-bottom: 30px;">Tự tay "tráng" bức ảnh này nhé...</h2>
+            <div class="darkroom-container">
+                <img src="assets/bimat.jpg" alt="Ảnh bí mật" class="darkroom-photo">
+                <div class="darkroom-mask"></div>
+            </div>
+        </section>
+
+        <!-- Thư 3D -->
+        <section class="parallax-section" id="section-2">
+            <div class="envelope-wrapper">
+                <div class="envelope">
+                    <div class="front flap"></div>
+                    <div class="front pocket"></div>
+                    <div class="letter">
+                        <div class="letter-content">
+                            <h3>Gửi Ebe Thùy Linh 💖</h3>
+                            <p>Bức thư này đã được anh mã hóa bằng một thuật toán đặc biệt, chỉ có trái tim em mới giải mã được thôi nghen.</p>
+                            <p>Chúc công chúa nhỏ của anh có một ngày Quốc tế Thiếu nhi thật vui vẻ. Dù là 1/6 hay bất kỳ ngày nào đi nữa, em vẫn luôn là em bé để anh che chở và yêu thương.</p>
+                            <p>Nhớ lúc nào cũng phải cười thật tươi đó!</p>
+                            <p class="signature">- Anh Quân -</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="click-indicator">Nhấn vào thư để mở 💌</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 9. Fullscreen Viewer (Dùng cho Gallery) -->
+    <div id="image-viewer">
+        <div class="viewer-backdrop"></div>
+        <img id="viewer-img" src="" alt="View">
+        <button id="close-viewer">Đóng</button>
+    </div>
+
+    <!-- 10. Chú ý: Script BẮT BUỘC phải nằm cuối cùng -->
+    <script src="three-scene.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
