@@ -290,16 +290,58 @@ body {
 .envelope-wrapper.open { animation: none; transform: rotateX(15deg) translateY(50px) scale(1.1); }
 
 /* ==========================================
-   9. MOBILE RESPONSIVE
+   9. MOBILE RESPONSIVE (TỐI ƯU CHO ĐIỆN THOẠI)
    ========================================== */
 @media (max-width: 768px) {
+    /* --- 1. Chữ Intro & Nút bấm --- */
     .text-line { font-size: 8vw; }
-    .parallax-item { width: 90vw; }
-    .parallax-item:nth-child(odd), .parallax-item:nth-child(even) { position: relative; top: auto; left: auto; right: auto; margin-bottom: 30px; }
-    .parallax-gallery { height: auto; display: flex; flex-direction: column; align-items: center; padding: 20px 0; }
-    .time-blocks { gap: 10px; }
-    .time-box { min-width: 70px; padding: 10px 15px; }
-    .time-box span { font-size: 28px; }
-    .time-box small { font-size: 11px; }
+    #start-btn { padding: 12px 25px; font-size: 1rem; }
+
+    /* --- 2. Terminal CTF --- */
     .terminal-window { width: 95vw; }
+    .terminal-body { height: 250px; font-size: 14px; padding: 15px; }
+
+    /* --- 3. Đếm ngày yêu --- */
+    .time-blocks { gap: 8px; }
+    .time-box { min-width: 65px; padding: 10px; }
+    .time-box span { font-size: 22px; }
+    .time-box small { font-size: 10px; }
+
+    /* --- 4. Gallery Parallax (Sắp xếp zig-zag không đè nhau) --- */
+    .gsap-title { font-size: 35px; text-align: center; }
+    .parallax-gallery { height: 180vh; } /* Tăng chiều cao để có không gian cuộn */
+    .parallax-item { width: 45vw; max-width: 180px; }
+    
+    /* Canh lại tọa độ cho 4 ảnh so le nhau trên màn hình dọc */
+    .parallax-item:nth-child(1) { top: 5%; left: 5%; }
+    .parallax-item:nth-child(2) { top: 25%; right: 5%; }
+    .parallax-item:nth-child(3) { top: 50%; left: 5%; }
+    .parallax-item:nth-child(4) { top: 75%; right: 5%; }
+
+    /* Vùng đen của chữ nhỏ lại một chút */
+    .parallax-item .caption { padding: 25px 5px 10px 5px; font-size: 14px; }
+
+    /* --- 5. Phòng Tối --- */
+    .darkroom-container { width: 90vw; height: 300px; }
+
+    /* --- 6. Thư 3D (Thu nhỏ để không lọt ra ngoài màn hình) --- */
+    #section-2 { padding: 80px 0; }
+    
+    /* Bóp chiều ngang của phong bì lại */
+    .envelope-wrapper { width: 90vw; max-width: 320px; height: 220px; }
+    
+    /* Chữ bên trong thư bé lại cho vừa giấy */
+    .letter { padding: 20px; }
+    .letter-content { font-size: 16px; line-height: 1.5; }
+    .letter-content h3 { font-size: 22px; margin-bottom: 10px; }
+    .letter-content .signature { font-size: 20px; margin-top: 10px; }
+    
+    /* Trạng thái mở thư trên Mobile (Kéo giấy ngắn lại, hạ phong bì xuống) */
+    .envelope-wrapper.open .letter { 
+        transform: translateY(-220px); /* Kéo lên ít hơn PC */
+        height: 460px; /* Giấy ngắn hơn PC */
+    }
+    .envelope-wrapper.open { 
+        transform: rotateX(10deg) translateY(20px) scale(1); /* Không scale to ra nữa */
+    }
 }
