@@ -123,11 +123,11 @@ function initGalleryParallax() {
     items.forEach(item => {
         const speed = parseFloat(item.getAttribute('data-speed')) || 1;
         gsap.to(item, {
-            y: (i, target) => -150 * speed,
+            y: -150 * speed, // Quãng đường ảnh trượt lên khi cuộn
             ease: "none",
             scrollTrigger: {
-                trigger: ".parallax-gallery",
-                start: "top bottom",
+                trigger: item, /* CỰC KỲ QUAN TRỌNG: Tự lấy chính tấm ảnh làm mốc kích hoạt */
+                start: "top bottom", /* Bắt đầu trượt khi ảnh chạm đáy màn hình */
                 end: "bottom top",
                 scrub: 1.5
             }

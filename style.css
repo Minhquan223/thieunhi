@@ -178,44 +178,57 @@ body {
 }
 
 /* ==========================================
-   6. THƯ VIỆN ẢNH PARALLAX
+   6. THƯ VIỆN ẢNH PARALLAX (MASONRY LAYOUT)
    ========================================== */
 .parallax-section {
     min-height: 100vh; display: flex; flex-direction: column;
-    justify-content: center; align-items: center; padding: 50px;
+    justify-content: center; align-items: center; padding: 50px 0;
 }
 .gsap-title {
     font-family: 'Dancing Script', cursive; font-size: 45px;
     color: #fff; margin-bottom: 20px; text-shadow: 0 0 15px rgba(255, 182, 193, 0.8);
 }
 
-.parallax-gallery {
-    position: relative; width: 100vw; height: 150vh; overflow: hidden;
+/* Áp dụng thuật toán chia cột tự động */
+.masonry-layout {
+    column-count: 3; /* Chia làm 3 cột trên máy tính */
+    column-gap: 25px;
+    width: 90vw;
+    max-width: 1200px;
+    margin: 40px auto;
 }
+
 .parallax-item {
-    position: absolute; width: 280px; border-radius: 15px; overflow: hidden;
-    box-shadow: 0 10px 30px rgba(255, 182, 193, 0.4);
+    position: relative;
+    display: inline-block; /* Quan trọng: Ngăn ảnh bị gãy sang cột khác */
+    width: 100%;
+    margin-bottom: 30px; /* Khoảng cách dọc giữa các ảnh */
+    border-radius: 15px; 
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(255, 182, 193, 0.3);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Vá lỗi hiển thị trên safari/ios */
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
 }
+
 .parallax-item:hover {
-    transform: scale(1.05) !important; z-index: 50;
+    transform: scale(1.02) !important; z-index: 50;
     box-shadow: 0 15px 40px rgba(255, 182, 193, 0.8);
 }
 .parallax-item img { width: 100%; height: auto; display: block; border-radius: 15px; }
 
+/* Caption đè lên ảnh */
 .parallax-item .caption {
-    position: absolute; bottom: -50px; left: 0; width: 100%;
-    background: linear-gradient(transparent, rgba(0,0,0,0.8));
-    color: white; text-align: center; padding: 15px 10px;
-    transition: bottom 0.3s ease; pointer-events: none;
-    font-family: 'Quicksand', sans-serif; font-weight: 600;
+    position: absolute; bottom: 0; left: 0; width: 100%;
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+    color: white; text-align: center; padding: 40px 10px 15px 10px;
+    pointer-events: none; font-family: 'Quicksand', sans-serif; font-weight: 600;
+    z-index: 10;
 }
-.parallax-item:hover .caption { bottom: 0; }
 
-.parallax-item:nth-child(1) { top: 10%; left: 15%; }
-.parallax-item:nth-child(2) { top: 30%; right: 10%; }
-.parallax-item:nth-child(3) { top: 60%; left: 20%; }
-.parallax-item:nth-child(4) { top: 75%; right: 25%; }
+/* XÓA BỎ mấy dòng .parallax-item:nth-child(1)... cũ đi vì hệ thống tự chia cột rồi */
 
 /* FULLSCREEN VIEWER */
 #image-viewer {
@@ -307,19 +320,15 @@ body {
     .time-box span { font-size: 22px; }
     .time-box small { font-size: 10px; }
 
-    /* --- 4. Gallery Parallax (Sắp xếp zig-zag không đè nhau) --- */
+    /* --- 4. Gallery Parallax (Kiểu Pinterest trên Mobile) --- */
     .gsap-title { font-size: 35px; text-align: center; }
-    .parallax-gallery { height: 180vh; } /* Tăng chiều cao để có không gian cuộn */
-    .parallax-item { width: 45vw; max-width: 180px; }
-    
-    /* Canh lại tọa độ cho 4 ảnh so le nhau trên màn hình dọc */
-    .parallax-item:nth-child(1) { top: 5%; left: 5%; }
-    .parallax-item:nth-child(2) { top: 25%; right: 5%; }
-    .parallax-item:nth-child(3) { top: 50%; left: 5%; }
-    .parallax-item:nth-child(4) { top: 75%; right: 5%; }
-
-    /* Vùng đen của chữ nhỏ lại một chút */
-    .parallax-item .caption { padding: 25px 5px 10px 5px; font-size: 14px; }
+    .masonry-layout { 
+        column-count: 2; /* Trên điện thoại chia làm 2 cột */
+        column-gap: 15px;
+        width: 95vw;
+    }
+    .parallax-item { margin-bottom: 15px; }
+    .parallax-item .caption { padding: 25px 5px 10px 5px; font-size: 13px; }
 
     /* --- 5. Phòng Tối --- */
     .darkroom-container { width: 90vw; height: 300px; }
