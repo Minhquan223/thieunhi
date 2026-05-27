@@ -228,7 +228,21 @@ body {
     z-index: 10;
 }
 
-/* XÓA BỎ mấy dòng .parallax-item:nth-child(1)... cũ đi vì hệ thống tự chia cột rồi */
+/* Tấm ảnh ngang đặc biệt chốt sổ */
+.special-end {
+    display: block; /* Thoát khỏi dạng chia cột */
+    width: 90vw; /* Chiếm 90% chiều ngang màn hình */
+    max-width: 1000px; /* Tránh bị to quá lố trên màn hình máy tính */
+    margin: 60px auto 0 auto; /* Căn giữa và cách phần trên 60px */
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(255, 182, 193, 0.5);
+}
+
+.special-end img {
+    width: 100%;
+    max-height: 70vh; /* Khống chế chiều cao để giữ dáng cinematic */
+    object-fit: cover; /* Cắt cúp mượt mà không bị méo ảnh */
+}
 
 /* FULLSCREEN VIEWER */
 #image-viewer {
@@ -352,5 +366,16 @@ body {
     }
     .envelope-wrapper.open { 
         transform: rotateX(10deg) translateY(20px) scale(1); /* Không scale to ra nữa */
+    }
+
+    /* --- Fix ảnh chốt sổ trên Mobile --- */
+    .special-end {
+        width: 95vw !important; /* Ép buộc nó to gần bằng màn hình điện thoại, xóa bỏ mọi giới hạn cũ */
+        max-width: none !important;
+        margin-top: 40px; /* Thu hẹp khoảng cách ở trên lại để cuộn chuột không bị hẫng */
+    }
+    
+    .special-end img {
+        max-height: 40vh; /* Trên điện thoại thì ảnh chỉ cao tầm 40% màn hình là vừa vặn, không bị cắt lẹm */
     }
 }
